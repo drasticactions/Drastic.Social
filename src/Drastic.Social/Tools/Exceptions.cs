@@ -17,7 +17,9 @@ namespace Drastic.Social
         /// </summary>
         /// <param name="message">Message.</param>
         public InvalidServerUriException(string message)
-            : base(message) { }
+            : base(message)
+        {
+        }
     }
 
     /// <summary>
@@ -32,7 +34,9 @@ namespace Drastic.Social
         /// <param name="message">Message.</param>
         /// <param name="ex">Exception.</param>
         public InvalidOauthUrlException(string message, Exception ex)
-            : base(message, ex) { }
+            : base(message, ex)
+        {
+        }
     }
 
     /// <summary>
@@ -47,7 +51,9 @@ namespace Drastic.Social
         /// <param name="message">Message.</param>
         /// <param name="ex">Exception.</param>
         public AppRegistrationCreationFailureException(string message, Exception ex)
-            : base(message, ex) { }
+            : base(message, ex)
+        {
+        }
     }
 
     /// <summary>
@@ -61,7 +67,9 @@ namespace Drastic.Social
         /// </summary>
         /// <param name="message">Message.</param>
         public AuthorizationException(string message)
-            : base(message) { }
+            : base(message)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AuthorizationException"/> class.
@@ -69,7 +77,9 @@ namespace Drastic.Social
         /// <param name="message">Message.</param>
         /// <param name="ex">Exception.</param>
         public AuthorizationException(string message, Exception ex)
-            : base(message, ex) { }
+            : base(message, ex)
+        {
+        }
     }
 
     /// <summary>
@@ -82,7 +92,9 @@ namespace Drastic.Social
         /// Initializes a new instance of the <see cref="MauidonException"/> class.
         /// </summary>
         public MauidonException()
-            : base() { }
+            : base()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MauidonException"/> class.
@@ -90,14 +102,18 @@ namespace Drastic.Social
         /// <param name="info">Serialization Info.</param>
         /// <param name="context">Context.</param>
         public MauidonException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+            : base(info, context)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MauidonException"/> class.
         /// </summary>
         /// <param name="message">Message.</param>
         public MauidonException(string message)
-            : base(message) { }
+            : base(message)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MauidonException"/> class.
@@ -105,6 +121,8 @@ namespace Drastic.Social
         /// <param name="message">Message.</param>
         /// <param name="ex">Exception.</param>
         public MauidonException(string message, Exception ex)
-            : base(message, ex) { }
+            : base(message, ex)
+        {
+        }
     }
 }

@@ -2,9 +2,9 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using Drastic.Social.Tools;
 using Drastic.Mastodon;
 using Drastic.Mastodon.Entities;
+using Drastic.Social.Tools;
 
 namespace Drastic.Social.ViewModels
 {
@@ -23,7 +23,7 @@ namespace Drastic.Social.ViewModels
         public AuthorizationViewModel(IServiceProvider services)
             : base(services)
         {
-            this.StartLoginCommand = new AsyncCommand(async () => await this.SaveAndLoginAsync(), () => true, this.Dispatcher,this.ErrorHandler);
+            this.StartLoginCommand = new AsyncCommand(async () => await this.SaveAndLoginAsync(), () => true, this.Dispatcher, this.ErrorHandler);
         }
 
         /// <summary>
@@ -69,17 +69,19 @@ namespace Drastic.Social.ViewModels
         /// Save and Login Async.
         /// </summary>
         /// <returns><see cref="Task"/>.</returns>
-        public async Task SaveAndLoginAsync()
+        public Task SaveAndLoginAsync()
         {
             if (this.Account is null || this.client is null)
             {
-                return;
+                return Task.CompletedTask;
             }
 
             this.IsBusy = true;
             var mastoAccount = new Models.MastoUserAccount(this.Account, this.client);
             this.Context.AddAccount(mastoAccount);
             this.IsBusy = false;
+
+            return Task.CompletedTask;
         }
     }
 }

@@ -6,7 +6,7 @@ using Drastic.Mastodon.Entities;
 
 namespace Drastic.Social.Models
 {
-/// <summary>
+    /// <summary>
     /// User Auth.
     /// </summary>
     public class UserAuth

@@ -13,6 +13,11 @@ namespace Drastic.Social.Models
     /// </summary>
     public class MastoUserAccount
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MastoUserAccount"/> class.
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="client"></param>
         public MastoUserAccount(Account account, MastodonClient client)
         {
             ArgumentNullException.ThrowIfNull(client, nameof(client));

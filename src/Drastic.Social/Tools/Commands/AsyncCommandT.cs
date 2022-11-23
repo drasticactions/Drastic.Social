@@ -94,7 +94,9 @@ namespace Drastic.Social.Tools
         void ICommand.Execute(object? parameter)
         {
             if (parameter is not null)
+            {
                 this.ExecuteAsync((T)parameter).FireAndForgetSafeAsync(this.errorHandler);
+            }
         }
     }
 }

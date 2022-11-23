@@ -15,6 +15,7 @@ namespace Drastic.Social.ViewModels
     {
         private bool isBusy;
         private string title = string.Empty;
+        private string isLoadingText = string.Empty;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseViewModel"/> class.
@@ -45,6 +46,15 @@ namespace Drastic.Social.ViewModels
         {
             get { return this.isBusy; }
             set { this.SetProperty(ref this.isBusy, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets the is loading text.
+        /// </summary>
+        public string IsLoadingText
+        {
+            get { return this.isLoadingText; }
+            set { this.SetProperty(ref this.isLoadingText, value); }
         }
 
         /// <summary>
@@ -110,6 +120,31 @@ namespace Drastic.Social.ViewModels
             {
                 this.Navigation?.Invoke(this, new NavigationEventArgs(viewModel, arguments));
             }
+        }
+
+        /// <summary>
+        /// Performs an Async task while setting the <see cref="IsBusy"/> variable.
+        /// If the task throws, it is handled by <see cref="ErrorHandler"/>.
+        /// </summary>
+        /// <param name="action">Task to run.</param>
+        /// <param name="isLoadingText">Optional Is Loading text.</param>
+        /// <returns>Task.</returns>
+        public async Task PerformBusyAsyncTask(Func<Task> action, string isLoadingText = "")
+        {
+            this.IsLoadingText = isLoadingText;
+            this.IsBusy = true;
+
+            try
+            {
+                await action.Invoke();
+            }
+            catch (Exception ex)
+            {
+                this.ErrorHandler.HandleError(ex);
+            }
+
+            this.IsBusy = false;
+            this.IsLoadingText = string.Empty;
         }
 
         /// <summary>

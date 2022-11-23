@@ -2,8 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using Drastic.Social.Services;
 using System.Windows.Input;
+using Drastic.Social.Services;
 
 namespace Drastic.Social.Tools
 {
