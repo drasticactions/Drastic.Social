@@ -22,6 +22,7 @@ Ioc.Default.ConfigureServices(
     .BuildServiceProvider());
 
 var loginViewModel = Ioc.Default.ResolveWith<LoginViewModel>();
+
 var authorizationViewModel = Ioc.Default.ResolveWith<AuthorizationViewModel>();
 
 loginViewModel.ServerBaseUrl = Prompt.Input<string>("Enter Instance Url", placeholder: loginViewModel.ServerBaseUrl);
