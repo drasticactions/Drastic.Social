@@ -2,7 +2,7 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using Drastic.Mastodon.Entities;
+using Mastonet.Entities;
 using Drastic.Social.Models;
 using Drastic.Social.Tools;
 

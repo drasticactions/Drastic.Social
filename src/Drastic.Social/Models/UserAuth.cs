@@ -2,7 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using Drastic.Mastodon.Entities;
+using Mastonet;
+using Mastonet.Entities;
 
 namespace Drastic.Social.Models
 {
@@ -14,7 +15,7 @@ namespace Drastic.Social.Models
         /// <summary>
         /// Gets or sets the Id.
         /// </summary>
-        public long Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or sets the Access Token.
@@ -58,7 +59,7 @@ namespace Drastic.Social.Models
         /// <param name="accountId">Account Id.</param>
         /// <param name="auth"><see cref="Auth"/>.</param>
         /// <returns><see cref="UserAuth"/>.</returns>
-        public static UserAuth GenerateUserAuth(long accountId, Auth auth)
+        public static UserAuth GenerateUserAuth(string accountId, Auth auth)
         {
             return new UserAuth()
             {

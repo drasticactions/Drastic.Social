@@ -2,8 +2,8 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using Drastic.Mastodon;
-using Drastic.Mastodon.Entities;
+using Mastonet;
+using Mastonet.Entities;
 
 namespace Drastic.Social.Services
 {
@@ -12,6 +12,10 @@ namespace Drastic.Social.Services
     /// </summary>
     public interface IAuthorizationService
     {
+        AppRegistration? AppRegistration { get; }
+
+        bool ShowCodeScreen { get; }
+
         /// <summary>
         /// Setup Login for Mastodon.
         /// </summary>

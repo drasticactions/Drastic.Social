@@ -35,6 +35,6 @@ namespace Drastic.Social.Services
         /// </summary>
         /// <param name="id">The account id.</param>
         /// <returns><see cref="MastoUserAccount"/>.</returns>
-        public MastoUserAccount GetAccount(long id);
+        public MastoUserAccount GetAccount(string id);
     }
 }

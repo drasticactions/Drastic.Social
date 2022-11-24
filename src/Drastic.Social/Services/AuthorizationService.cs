@@ -4,8 +4,8 @@
 
 using System;
 using System.Threading.Tasks;
-using Drastic.Mastodon;
-using Drastic.Mastodon.Entities;
+using Mastonet;
+using Mastonet.Entities;
 
 namespace Drastic.Social.Services
 {
@@ -14,6 +14,7 @@ namespace Drastic.Social.Services
     /// </summary>
     public class AuthorizationService : IAuthorizationService
     {
+        private readonly string codeScreen = "urn:ietf:wg:oauth:2.0:oob";
         private string redirectUrl;
 
         private string hostUrl = string.Empty;
@@ -28,12 +29,18 @@ namespace Drastic.Social.Services
         /// <param name="browserService"><see cref="IBrowserService"/>.</param>
         /// <param name="redirectUrl">The redirect URL to go to.</param>
         /// <param name="appName">The default app name to show on the Oauth Screen.</param>
-        public AuthorizationService(IBrowserService browserService, string redirectUrl = "DrasticSocial://", string appName = "Drastic.Social")
+        public AuthorizationService(IBrowserService browserService, string appName = "Drastic.Social", string? redirectUrl = null)
         {
             this.appName = appName;
-            this.redirectUrl = redirectUrl;
+            this.redirectUrl = redirectUrl ?? this.codeScreen;
             this.launcher = browserService;
         }
+
+        /// <inheritdoc/>
+        public AppRegistration? AppRegistration => this.appRegistration;
+
+        /// <inheritdoc/>
+        public bool ShowCodeScreen => this.redirectUrl == this.codeScreen;
 
         /// <inheritdoc/>
         public async Task SetupLogin(string serverBase)
@@ -51,7 +58,7 @@ namespace Drastic.Social.Services
             ArgumentNullException.ThrowIfNull(this.appRegistration, nameof(this.appRegistration));
 
             var auth = await this.authClient.ConnectWithCode(code, this.redirectUrl);
-            var client = new MastodonClient(this.appRegistration, auth);
+            var client = new MastodonClient(this.appRegistration.Instance, auth.AccessToken);
             var account = await client.GetCurrentUser();
             return (client, account);
         }

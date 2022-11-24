@@ -3,8 +3,8 @@
 // </copyright>
 
 using System.ComponentModel.DataAnnotations.Schema;
-using Drastic.Mastodon;
-using Drastic.Mastodon.Entities;
+using Mastonet;
+using Mastonet.Entities;
 
 namespace Drastic.Social.Models
 {
@@ -18,25 +18,24 @@ namespace Drastic.Social.Models
         /// </summary>
         /// <param name="account"></param>
         /// <param name="client"></param>
-        public MastoUserAccount(Account account, MastodonClient client)
+        public MastoUserAccount(Account account, MastodonClient client, AppRegistration appRegistration)
         {
             ArgumentNullException.ThrowIfNull(client, nameof(client));
             ArgumentNullException.ThrowIfNull(account, nameof(account));
-            ArgumentNullException.ThrowIfNull(client.AuthToken, nameof(client.AuthToken));
-            ArgumentNullException.ThrowIfNull(client.AppRegistration, nameof(client.AppRegistration));
+            ArgumentNullException.ThrowIfNull(appRegistration, nameof(appRegistration));
             this.Account = account;
             this.AccountId = this.Account.Id;
             this.Client = client;
-            this.AppRegistration = this.Client.AppRegistration;
-            this.AppRegistrationId = this.Client.AppRegistration.Id;
-            this.UserAuth = UserAuth.GenerateUserAuth(this.AccountId, this.Client.AuthToken);
+            this.AppRegistration = appRegistration;
+            this.AppRegistrationId = appRegistration.Id;
+            this.UserAuth = UserAuth.GenerateUserAuth(this.AccountId, new Auth() { AccessToken = client.AccessToken });
             this.UserAuthId = this.Account.Id;
         }
 
         /// <summary>
         /// Gets or sets the Account Id.
         /// </summary>
-        public long AccountId { get; set; }
+        public string AccountId { get; set; }
 
         /// <summary>
         /// Gets or sets the App Registration Id.
@@ -56,7 +55,7 @@ namespace Drastic.Social.Models
         /// <summary>
         /// Gets or sets the User Auth Id.
         /// </summary>
-        public long UserAuthId { get; set; }
+        public string UserAuthId { get; set; }
 
         /// <summary>
         /// Gets or sets the UserAuth.
