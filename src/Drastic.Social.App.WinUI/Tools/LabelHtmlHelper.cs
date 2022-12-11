@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Documents;
 internal static class LabelHtmlHelper
 {
     // All the supported HTML tags
+    internal const string ElementA = "A";
     internal const string ElementB = "B";
     internal const string ElementBr = "BR";
     internal const string ElementEm = "EM";
@@ -27,6 +28,18 @@ internal static class LabelHtmlHelper
         var elementName = element.Name.ToString().ToUpper();
         switch (elementName)
         {
+            case ElementA:
+                var hyperlink = new Hyperlink();
+                var href = element.Attribute("href");
+                if (href != null)
+                {
+                    hyperlink.NavigateUri = new Uri(href.Value);
+                }
+
+                inlines.Add(hyperlink);
+                inlines.Add(new Run { Text = " " });
+                currentInlines = hyperlink.Inlines;
+                break;
             case ElementB:
             case ElementStrong:
                 var bold = new Bold();
