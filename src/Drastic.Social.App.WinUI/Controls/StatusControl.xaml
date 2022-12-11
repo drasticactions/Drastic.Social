@@ -8,6 +8,7 @@
     xmlns:local="using:Drastic.Social.App.WinUI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
     mc:Ignorable="d">
 
     <Grid Margin="5">
@@ -15,7 +16,13 @@
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Image VerticalAlignment="Top" Height="50" Source="{x:Bind Status.Account.AvatarUrl, Mode=OneWay}"/>
+        <controls:ImageEx
+            VerticalAlignment="Top"
+            Height="50"
+            CornerRadius="5"
+            PlaceholderStretch="UniformToFill"
+            PlaceholderSource="/Assets/missing.png"
+            Source="{x:Bind Status.Account.AvatarUrl, Mode=OneWay}"/>
         <Grid VerticalAlignment="Top" Padding="10,0,0,0" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
