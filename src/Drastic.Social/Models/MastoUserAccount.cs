@@ -13,6 +13,10 @@ namespace Drastic.Social.Models
     /// </summary>
     public class MastoUserAccount
     {
+        public MastoUserAccount()
+        {
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="MastoUserAccount"/> class.
         /// </summary>
@@ -35,7 +39,7 @@ namespace Drastic.Social.Models
         /// <summary>
         /// Gets or sets the Account Id.
         /// </summary>
-        public string AccountId { get; set; }
+        public string? AccountId { get; set; }
 
         /// <summary>
         /// Gets or sets the App Registration Id.
@@ -50,17 +54,17 @@ namespace Drastic.Social.Models
         /// <summary>
         /// Gets or sets the Account.
         /// </summary>
-        public virtual Account Account { get; set; }
+        public virtual Account? Account { get; set; }
 
         /// <summary>
         /// Gets or sets the User Auth Id.
         /// </summary>
-        public string UserAuthId { get; set; }
+        public string? UserAuthId { get; set; }
 
         /// <summary>
         /// Gets or sets the UserAuth.
         /// </summary>
-        public virtual UserAuth UserAuth { get; set; }
+        public virtual UserAuth? UserAuth { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the account is the default.
@@ -72,6 +76,6 @@ namespace Drastic.Social.Models
         /// </summary>
         [NotMapped]
 
-        public MastodonClient Client { get; set; }
+        public MastodonClient? Client { get; set; }
     }
 }

@@ -2,9 +2,10 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using Mastonet.Entities;
 using Drastic.Social.Models;
 using Drastic.Social.Tools;
+using Mastonet;
+using Mastonet.Entities;
 
 namespace Drastic.Social.ViewModels
 {
@@ -16,6 +17,7 @@ namespace Drastic.Social.ViewModels
     {
         private MastoUserAccount account;
         private Account? userAccount;
+        private TimelineStreaming? streaming;
         private MastodonList<Status>? timeline;
         private TimelineType timelineType;
 
@@ -31,8 +33,13 @@ namespace Drastic.Social.ViewModels
             this.account = this.Context.GetDefaultAccount();
             this.UserAccount = this.Account.Account;
             this.ViewProfileCommand = new AsyncCommand<Account>(
-                async (Account account) => await this.ExecuteViewProfileCommand(account),
+                async (Account account) => await this.PerformBusyAsyncTask(async () => await this.ExecuteViewProfileCommand(account)),
                 null,
+                this.ErrorHandler);
+            this.RefreshFeedCommand = new AsyncCommand(
+                async () => await this.PerformBusyAsyncTask(async () => await this.RefreshFeed()),
+                null,
+                this.Dispatcher,
                 this.ErrorHandler);
         }
 
@@ -40,6 +47,11 @@ namespace Drastic.Social.ViewModels
         /// Gets or sets the View Profile Command.
         /// </summary>
         public AsyncCommand<Account> ViewProfileCommand { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Refresh Feed Command.
+        /// </summary>
+        public AsyncCommand RefreshFeedCommand { get; set; }
 
         /// <summary>
         /// Gets or sets the Account.
@@ -74,7 +86,11 @@ namespace Drastic.Social.ViewModels
         /// <returns><see cref="Task"/>.</returns>
         public async Task RefreshFeed()
         {
-            this.IsBusy = true;
+            if (this.Account.Client is null)
+            {
+                return;
+            }
+
             switch (this.timelineType)
             {
                 case TimelineType.Public:
@@ -88,15 +104,13 @@ namespace Drastic.Social.ViewModels
                     {
                         this.Timeline = await this.Account.Client.GetAccountStatuses(this.UserAccount.Id);
                     }
-                    else
+                    else if (this.Account.AccountId is not null)
                     {
                         this.Timeline = await this.Account.Client.GetAccountStatuses(this.Account.AccountId);
                     }
 
                     break;
             }
-
-            this.IsBusy = false;
         }
 
         /// <inheritdoc/>
@@ -123,6 +137,13 @@ namespace Drastic.Social.ViewModels
                 default:
                     break;
             }
+        }
+
+        /// <inheritdoc/>
+        public override async Task OnLoad()
+        {
+            await base.OnLoad();
+            await this.RefreshFeedCommand.ExecuteAsync();
         }
 
         private Task ExecuteViewProfileCommand(Account account)

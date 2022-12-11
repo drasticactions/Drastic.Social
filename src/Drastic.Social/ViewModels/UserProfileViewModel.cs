@@ -2,8 +2,9 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
-using Mastonet.Entities;
 using Drastic.Social.Models;
+using Drastic.Social.Tools;
+using Mastonet.Entities;
 
 namespace Drastic.Social.ViewModels
 {

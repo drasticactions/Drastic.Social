@@ -15,7 +15,7 @@ namespace Drastic.Social.ViewModels
     {
         private MastodonClient? client;
         private Account? account;
-        private string code;
+        private string code = string.Empty;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AuthorizationViewModel"/> class.

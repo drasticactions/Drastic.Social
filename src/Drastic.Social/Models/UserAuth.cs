@@ -15,7 +15,7 @@ namespace Drastic.Social.Models
         /// <summary>
         /// Gets or sets the Id.
         /// </summary>
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         /// <summary>
         /// Gets or sets the Access Token.

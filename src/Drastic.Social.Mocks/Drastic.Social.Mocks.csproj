@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="Json\HomeTootViewModel.json" />
+	  <None Remove="Json\PublicTootViewModel.json" />
+	  <None Remove="Json\UserAccountTimeline.json" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<AdditionalFiles Include="..\..\stylecop.json" Link="stylecop.json" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <EmbeddedResource Include="Json\HomeTootViewModel.json" />
+	  <EmbeddedResource Include="Json\PublicTootViewModel.json" />
+	  <EmbeddedResource Include="Json\UserAccountTimeline.json" />
+	</ItemGroup>
+</Project>

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Drastic.Social.App.WinUI (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Drastic.Social.App.WinUI (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

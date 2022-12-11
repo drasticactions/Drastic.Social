@@ -19,18 +19,54 @@ Ioc.Default.ConfigureServices(
     .AddSingleton<IAuthorizationService>(provider => new AuthorizationService(provider.GetService<IBrowserService>()!, "Drastic.Social.Console"))
     .AddTransient<AuthorizationViewModel>()
     .AddTransient<LoginViewModel>()
+    .AddTransient<UserProfileViewModel>()
+    .AddTransient<HomeTootViewModel>()
+    .AddTransient<PublicTootViewModel>()
     .BuildServiceProvider());
 
-var loginViewModel = Ioc.Default.ResolveWith<LoginViewModel>();
+var database = Ioc.Default.GetService<IDatabaseContext>()!;
 
-var authorizationViewModel = Ioc.Default.ResolveWith<AuthorizationViewModel>();
+var loginDefault = database.GetDefaultAccount();
 
-loginViewModel.ServerBaseUrl = Prompt.Input<string>("Enter Instance Url", placeholder: loginViewModel.ServerBaseUrl);
+if (loginDefault is not null)
+{
+    var userProfileViewModel = Ioc.Default.ResolveWith<UserProfileViewModel>();
+    await userProfileViewModel.OnLoad();
+    foreach (var item in userProfileViewModel.Timeline!)
+    {
+        Console.WriteLine($"{item.Account.DisplayName} - {item.Content}");
+    }
 
-await loginViewModel.StartLoginCommand.ExecuteAsync();
+    var json = System.Text.Json.JsonSerializer.Serialize(userProfileViewModel.Timeline, new System.Text.Json.JsonSerializerOptions() { WriteIndented = true });
+    File.WriteAllText("UserProfileViewModel.json", json);
+}
+else
+{
+    await SetupLogin();
+}
 
-authorizationViewModel.Code = Prompt.Input<string>("Enter auth code");
+Console.WriteLine("Press any key to exit.");
+Console.ReadKey();
 
-await authorizationViewModel.LoginViaCodeCommand.ExecuteAsync(authorizationViewModel.Code);
+async Task SetupLogin()
+{
+    var loginViewModel = Ioc.Default.ResolveWith<LoginViewModel>();
 
-Console.WriteLine(authorizationViewModel.Account!.UserName);
+    var authorizationViewModel = Ioc.Default.ResolveWith<AuthorizationViewModel>();
+
+    loginViewModel.ServerBaseUrl = Prompt.Input<string>("Enter Instance Url", placeholder: loginViewModel.ServerBaseUrl);
+
+    await loginViewModel.StartLoginCommand.ExecuteAsync();
+
+    authorizationViewModel.Code = Prompt.Input<string>("Enter auth code");
+
+    await authorizationViewModel.LoginViaCodeCommand.ExecuteAsync(authorizationViewModel.Code);
+
+    Console.WriteLine(authorizationViewModel.Account!.UserName);
+
+    await authorizationViewModel.StartLoginCommand.ExecuteAsync();
+
+    var account = database.GetDefaultAccount();
+
+    Console.WriteLine(account.Account!.UserName);
+}
