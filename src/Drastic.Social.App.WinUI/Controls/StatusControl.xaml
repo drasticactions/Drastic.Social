@@ -1,0 +1,39 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
+<!-- Licensed under the MIT License. See LICENSE in the project root for license information. -->
+
+<UserControl
+    x:Class="Drastic.Social.App.WinUI.Controls.StatusControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Drastic.Social.App.WinUI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Image VerticalAlignment="Top" Height="50" Source="{x:Bind Status.Account.AvatarUrl, Mode=OneWay}"/>
+        <Grid VerticalAlignment="Top" Padding="10,0,0,0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Padding="5,0,5,0" Text="{x:Bind Status.Account.UserName, Mode=OneWay}" FontWeight="Bold" />
+                <TextBlock Grid.Column="1" Padding="5,0,5,0" HorizontalAlignment="Stretch" Text="{x:Bind Status.Account.AccountName, Converter={StaticResource AddAtSignConverter}, Mode=OneWay}" />
+                <TextBlock Grid.Column="2" Padding="5,0,5,0" HorizontalAlignment="Right" Text="{x:Bind Status.CreatedAt, Converter={StaticResource CreatedTimeConverter}, Mode=OneWay}" />
+            </Grid>
+            <local:HtmlStatus Margin="5" Grid.Row="1" Html="{x:Bind Status.Content, Mode=OneWay}"/>
+        </Grid>
+    </Grid>
+</UserControl>

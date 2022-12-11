@@ -26,14 +26,12 @@ namespace Drastic.Social.App.WinUI
     /// </summary>
     public sealed partial class MainWindow : Window
     {
-        public MainWindow()
+        private Page page;
+
+        public MainWindow(Page page)
         {
             this.InitializeComponent();
-        }
-
-        private void myButton_Click(object sender, RoutedEventArgs e)
-        {
-            myButton.Content = "Clicked";
+            this.MainFrame.Content = this.page = page;
         }
     }
 }

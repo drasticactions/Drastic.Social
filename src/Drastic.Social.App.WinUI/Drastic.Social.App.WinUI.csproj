@@ -11,6 +11,11 @@
 		<UseWinUI>true</UseWinUI>
 		<EnableMsixTooling>true</EnableMsixTooling>
 	</PropertyGroup>
+	<ItemGroup>
+	  <None Remove="Controls\HtmlStatus.xaml" />
+	  <None Remove="Controls\StatusControl.xaml" />
+	  <None Remove="Pages\DebugPage.xaml" />
+	</ItemGroup>
 	
 	<ItemGroup>
 		<AdditionalFiles Include="..\..\stylecop.json" Link="stylecop.json" />
@@ -49,6 +54,24 @@
 	  <ProjectReference Include="..\Drastic.Social.LiteDB\Drastic.Social.LiteDB.csproj" />
 	  <ProjectReference Include="..\Drastic.Social.Mocks\Drastic.Social.Mocks.csproj" />
 	  <ProjectReference Include="..\Drastic.Social\Drastic.Social.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Page Update="Pages\DebugPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	</ItemGroup>
+	<ItemGroup>
+	  <Page Update="Controls\StatusControl.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Tools\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Page Update="Controls\HtmlStatus.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
 	</ItemGroup>
 
 	<!-- 

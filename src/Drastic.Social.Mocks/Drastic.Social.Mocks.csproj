@@ -21,4 +21,8 @@
 	  <EmbeddedResource Include="Json\PublicTootViewModel.json" />
 	  <EmbeddedResource Include="Json\UserAccountTimeline.json" />
 	</ItemGroup>
+	
+	<ItemGroup>
+	  <ProjectReference Include="..\Drastic.Social\Drastic.Social.csproj" />
+	</ItemGroup>
 </Project>
