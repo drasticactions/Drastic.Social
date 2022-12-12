@@ -37,6 +37,7 @@ namespace Drastic.Social.App.WinUI
             .AddSingleton<IDatabaseContext>(new LiteDBDatabaseContext(Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "testdatabase.db")))
             .AddSingleton<IErrorHandlerService, ErrorHandlerService>()
             .AddSingleton<IBrowserService, BrowserService>()
+            .AddSingleton<IShareService, ShareService>()
             .AddSingleton<IAppDispatcher>(provider => new WinUIAppDispatcher(dispatcherQueue))
             .AddSingleton<IAuthorizationService>(provider => new AuthorizationService(provider.GetService<IBrowserService>()!, "Drastic.Social.WinUI"))
             .AddTransient<AuthorizationViewModel>()

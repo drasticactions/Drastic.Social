@@ -36,11 +36,66 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Padding="5,0,5,0" Text="{x:Bind Status.Account.UserName, Mode=OneWay}" FontWeight="Bold" />
+                <TextBlock Grid.Column="0" Text="{x:Bind Status.Account.UserName, Mode=OneWay}" FontWeight="Bold" />
                 <TextBlock Grid.Column="1" Padding="5,0,5,0" HorizontalAlignment="Stretch" Text="{x:Bind Status.Account.AccountName, Converter={StaticResource AddAtSignConverter}, Mode=OneWay}" />
                 <TextBlock Grid.Column="2" Padding="5,0,5,0" HorizontalAlignment="Right" Text="{x:Bind Status.CreatedAt, Converter={StaticResource CreatedTimeConverter}, Mode=OneWay}" />
             </Grid>
             <local:HtmlStatus Margin="5" Grid.Row="1" Html="{x:Bind Status.Content, Mode=OneWay}"/>
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Button Background="Transparent" BorderBrush="Transparent">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <SymbolIcon Symbol="Message"/>
+                            <TextBlock 
+                                Visibility="{x:Bind Status.RepliesCount,Mode=OneWay, Converter={StaticResource VisibilityGreaterThanZeroConverter}}"
+                                Padding="5,0,0,0"
+                                Grid.Column="1"
+                                Text="{Binding RepliesCount}"/>
+                        </Grid>
+                    </Button>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Button Background="Transparent" BorderBrush="Transparent">
+                        <Grid>
+                            <SymbolIcon Symbol="Refresh"/>
+                        </Grid>
+                    </Button>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Button Background="Transparent" BorderBrush="Transparent">
+                        <Grid>
+                            <SymbolIcon Symbol="OutlineStar"/>
+                            <SymbolIcon Visibility="Collapsed" Symbol="SolidStar"/>
+                        </Grid>
+                    </Button>
+                    
+                </Grid>
+                <Grid Grid.Column="3">
+                    <Button Click="Share_Click" Background="Transparent" BorderBrush="Transparent">
+                        <Grid>
+                            <SymbolIcon Symbol="Share"/>
+                        </Grid>
+                    </Button>
+                </Grid>
+                <Grid Grid.Column="4">
+                    <Button Background="Transparent" BorderBrush="Transparent">
+                        <Grid>
+                            <SymbolIcon Symbol="More"/>
+                        </Grid>
+                    </Button>
+                </Grid>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

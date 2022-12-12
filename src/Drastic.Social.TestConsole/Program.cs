@@ -15,6 +15,7 @@ Ioc.Default.ConfigureServices(
     .AddSingleton<IDatabaseContext>(new LiteDBDatabaseContext("testdatabase.db"))
     .AddSingleton<IErrorHandlerService, ConsoleErrorLogHandler>()
     .AddSingleton<IBrowserService, ConsoleBrowserService>()
+    .AddSingleton<IShareService, ConsoleShareService>()
     .AddSingleton<IAppDispatcher, ConsoleAppDispatcher>()
     .AddSingleton<IAuthorizationService>(provider => new AuthorizationService(provider.GetService<IBrowserService>()!, "Drastic.Social.Console"))
     .AddTransient<AuthorizationViewModel>()

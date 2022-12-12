@@ -27,6 +27,7 @@ namespace Drastic.Social.ViewModels
             this.Dispatcher = services.GetService(typeof(IAppDispatcher)) as IAppDispatcher ?? throw new NullReferenceException(nameof(IAppDispatcher));
             this.ErrorHandler = services.GetService(typeof(IErrorHandlerService)) as IErrorHandlerService ?? throw new NullReferenceException(nameof(IErrorHandlerService));
             this.Context = services.GetService(typeof(IDatabaseContext)) as IDatabaseContext ?? throw new NullReferenceException(nameof(IDatabaseContext));
+            this.Share = services.GetService(typeof(IShareService)) as IShareService ?? throw new NullReferenceException(nameof(IShareService));
             this.Authorization = services.GetService(typeof(IAuthorizationService)) as IAuthorizationService ?? throw new NullReferenceException(nameof(IAuthorizationService));
         }
 
@@ -85,6 +86,11 @@ namespace Drastic.Social.ViewModels
         /// Gets the Dispatcher.
         /// </summary>
         internal IAppDispatcher Dispatcher { get; }
+
+        /// <summary>
+        /// Gets the Share service.
+        /// </summary>
+        internal IShareService Share { get; }
 
         /// <summary>
         /// Gets the Authorization.

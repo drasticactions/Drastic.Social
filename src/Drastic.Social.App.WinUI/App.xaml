@@ -14,6 +14,7 @@
                 <!-- Other merged dictionaries here -->
             </ResourceDictionary.MergedDictionaries>
             <converters:AddAtSignConverter x:Key="AddAtSignConverter" />
+            <converters:VisibilityGreaterThanZeroConverter x:Key="VisibilityGreaterThanZeroConverter" />
             <converters:CreatedTimeConverter x:Key="CreatedTimeConverter" />
         </ResourceDictionary>
     </Application.Resources>
