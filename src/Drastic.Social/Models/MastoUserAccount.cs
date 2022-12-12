@@ -16,7 +16,7 @@ namespace Drastic.Social.Models
         public MastoUserAccount()
         {
         }
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MastoUserAccount"/> class.
         /// </summary>

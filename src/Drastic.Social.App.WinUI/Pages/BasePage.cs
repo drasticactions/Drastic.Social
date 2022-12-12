@@ -1,5 +1,6 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See LICENSE in the project root for license information.
+﻿// <copyright file="BasePage.cs" company="Drastic Actions">
+// Copyright (c) Drastic Actions. All rights reserved.
+// </copyright>
 
 using Drastic.Social.Tools;
 using Drastic.Social.ViewModels;
@@ -16,6 +17,7 @@ namespace Drastic.Social.App.WinUI.Pages
             this.Loaded += this.BasePage_Loaded;
         }
 
+        /// <inheritdoc/>
         public void Dispose()
         {
             this.Dispose(disposing: true);

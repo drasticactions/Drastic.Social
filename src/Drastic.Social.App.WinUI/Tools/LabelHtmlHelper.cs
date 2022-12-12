@@ -1,5 +1,6 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See LICENSE in the project root for license information.
+﻿// <copyright file="LabelHtmlHelper.cs" company="Drastic Actions">
+// Copyright (c) Drastic Actions. All rights reserved.
+// </copyright>
 
 using System.Xml.Linq;
 using Microsoft.UI.Xaml.Documents;
@@ -22,7 +23,9 @@ internal static class LabelHtmlHelper
     public static void ParseText(XElement? element, InlineCollection inlines)
     {
         if (element == null)
+        {
             return;
+        }
 
         var currentInlines = inlines;
         var elementName = element.Name.ToString().ToUpper();
@@ -83,6 +86,7 @@ internal static class LabelHtmlHelper
                 currentInlines = divSpan.Inlines;
                 break;
         }
+
         foreach (var node in element.Nodes())
         {
             if (node is XText textElement)
@@ -102,13 +106,15 @@ internal static class LabelHtmlHelper
         }
     }
 
-    static bool AddLineBreakIfNeeded(InlineCollection inlines)
+    private static bool AddLineBreakIfNeeded(InlineCollection inlines)
     {
         if (inlines.Count <= 0)
+        {
             return false;
+        }
 
         var lastInline = inlines[inlines.Count - 1];
-        while ((lastInline is Span))
+        while (lastInline is Span)
         {
             var span = (Span)lastInline;
             if (span.Inlines.Count > 0)
@@ -118,7 +124,9 @@ internal static class LabelHtmlHelper
         }
 
         if (lastInline is LineBreak)
+        {
             return false;
+        }
 
         inlines.Add(new LineBreak());
         return true;

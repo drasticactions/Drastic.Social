@@ -20,10 +20,12 @@ namespace Drastic.Social.App.WinUI.Controls
 
         public Status Status
         {
-            get {
+            get
+            {
                 var value = (Status)this.GetValue(StatusProperty);
                 return value;
             }
+
             set
             {
                 this.SetValue(StatusProperty, value);

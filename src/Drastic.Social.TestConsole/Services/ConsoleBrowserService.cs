@@ -7,6 +7,7 @@ using Drastic.Social.Services;
 
 public class ConsoleBrowserService : IBrowserService
 {
+    /// <inheritdoc/>
     public Task OpenAsync(string url)
     {
         Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });

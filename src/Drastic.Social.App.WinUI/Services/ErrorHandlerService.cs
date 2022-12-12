@@ -8,6 +8,7 @@ namespace Drastic.Social.App.WinUI.Services
 {
     public class ErrorHandlerService : IErrorHandlerService
     {
+        /// <inheritdoc/>
         public void HandleError(Exception ex)
         {
             // TODO: Handle Errors.

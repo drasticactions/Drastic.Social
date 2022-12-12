@@ -6,6 +6,7 @@ using Drastic.Social.Services;
 
 public class ConsoleAppDispatcher : IAppDispatcher
 {
+    /// <inheritdoc/>
     public bool Dispatch(Action action)
     {
         action.Invoke();

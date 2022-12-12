@@ -2,9 +2,9 @@
 // Copyright (c) Drastic Actions. All rights reserved.
 // </copyright>
 
+using System.Collections.ObjectModel;
 using Drastic.Social.ViewModels;
 using Mastonet.Entities;
-using System.Collections.ObjectModel;
 
 namespace Drastic.Social.Mocks
 {
@@ -17,6 +17,7 @@ namespace Drastic.Social.Mocks
 
         public ObservableCollection<Status> Status { get; } = new ObservableCollection<Status>();
 
+        /// <inheritdoc/>
         public override async Task OnLoad()
         {
             await base.OnLoad();
